@@ -1,0 +1,20 @@
+{
+  "name": "zcl/area-spider",
+  "require": {
+    "php": "^7.4",
+    "jaeger/querylist": "^4.2",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "McaSpider\\": "classes"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "zhangchenglin",
+      "email": "469946668@qq.com"
+    }
+  ]
+}
