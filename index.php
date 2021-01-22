@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '1024M');
 ini_set('max_execution_time', 100);
 
 use QL\QueryList;
@@ -8,15 +9,35 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 $url = 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html';
 
 $find_tr = 'tr:gt(2)';
-$find_code = 'tr:gt(2) td:eq(1)';
-$find_name = 'tr:gt(2) td:eq(2)';
-$find_parent = 'tr:gt(2) td:eq(3)';
 
 $data = (new QueryList)
     ->get($url)
     ->find($find_tr)
     ->map(function ($row) {
-        return $row->find('td:eq(1)')->texts()->all();
+        $find_code = 'td:eq(1)';
+        $find_name = 'td:eq(2)';
+        $find_parent = 'td:eq(3)';
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+        $array = [];
+
+//        array_push($array, $row->find($find_code)->texts()->all(), $row->find($find_name)->texts()->all(), $row->find($find_parent)->texts()->all());
+// -----------------------------------------------------------------------------
+        $array['code'] = $row->find($find_code)->texts()->all();
+        $array['name'] = $row->find($find_name)->texts()->all();
+        $array['parent'] = $row->find($find_parent)->texts()->all();
+// -----------------------------------------------------------------------------
+//        $array = [
+//            $row->find($find_code)->texts()->all(),
+//            $row->find($find_name)->texts()->all(),
+//            $row->find($find_parent)->texts()->all(),
+//        ];
+// -----------------------------------------------------------------------------
+        return $array;
+
+        // todo:下面的本意是想过滤掉名称中的span元素里的空格，失败
+//        return $row->find('span')->texts()->remove()->find($find_name)->texts()->all();
     })
     ->all();
 
@@ -25,8 +46,8 @@ $data = (new QueryList)
 
 echo '<br>';
 echo $url;
-echo '<hr><br>';
+//echo '<hr><br>';
 //echo print_r($data, true);
-//echo '<hr>';
+echo '<hr>';
 echo json_encode($data, JSON_UNESCAPED_UNICODE);
 echo '<hr>';
