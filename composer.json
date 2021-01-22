@@ -6,9 +6,7 @@
     "ext-json": "*"
   },
   "autoload": {
-    "psr-4": {
-      "McaSpider\\": "classes"
-    }
+    "psr-4": {}
   },
   "license": "MIT",
   "authors": [
