@@ -7,7 +7,7 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 $url = 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html';
 
-$find = 'tr:gt(2) td:eq(2)';
+$find = 'tr:eq(3) td:eq(2)';
 
 
 
@@ -23,6 +23,7 @@ $data = (new QueryList)
     ->all();
 
 // ---------------------------------------------------------------------------------------------------------------------
+
 echo '<br>';
 echo $url;
 echo '<hr><br>';
