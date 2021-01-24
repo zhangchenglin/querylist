@@ -10,9 +10,9 @@ $url = 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html';
 
 $find_tr = 'tr:gt(2)';
 
-$data = (new QueryList)
-    ->get($url)
-    ->find($find_tr)
+$ql = (new QueryList)->get($url);
+
+$data = $ql->find($find_tr)
     ->map(function ($row) {
         $find_code = 'td:eq(1)';
         $find_name = 'td:eq(2)';
@@ -41,6 +41,7 @@ $data = (new QueryList)
     })
     ->all();
 
+$ql->destruct();
 
 // ---------------------------------------------------------------------------------------------------------------------
 

@@ -19,11 +19,11 @@ $rules = [
     }],
 ];
 
-$data = (new QueryList)
-    ->get($url)
-    ->rules($rules)
-    ->range('')
-    ->queryData();
+$ql = (new QueryList)->get($url);
+
+$data = $ql->rules($rules)->range('')->queryData();
+
+$ql->destruct();
 
 // ---------------------------------------------------------------------------------------------------------------------
 
