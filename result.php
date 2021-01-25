@@ -24,15 +24,12 @@ $method = $_POST['method'];
 $url = $_POST['url'];
 
 switch ($method) {
-    case 'find':
-        require_once dirname(__FILE__) . '/functions/queryList-find.php';
-        break;
-    case 'rules':
-        require_once dirname(__FILE__) . '/functions/queryList-rules.php';
+    case 'queryList':
+        require_once dirname(__FILE__) . '/functions/queryList.php';
         break;
     default:
         $errorCode = [
-            'code' => -10,
+            'code' => -7,
             'msg' => 'method参数错误，文件不存在。',
         ];
 
@@ -41,8 +38,24 @@ switch ($method) {
 
 global $data;
 
-$data_result = $data;
+// ---------------------------------------------------------------------------------------------------------------------
 //$data_result = ['result' => $data];
+//$data_result = json_encode($data_result, JSON_UNESCAPED_UNICODE);
+//
+//$data_result = str_replace('\r\n', '', $data_result);
+//$data_result = str_replace(' ', '', $data_result);
+//$data_result = str_replace(' ', '', $data_result);
+//
+//echo $data_result;
 
-echo json_encode($data_result);
-//echo json_encode($data_result, JSON_UNESCAPED_UNICODE);
+// ---------------------------------------------------------------------------------------------------------------------
+
+$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+$data = str_replace('\r\n', '', $data);
+$data = str_replace(' ', '', $data);
+$data = str_replace(' ', '', $data);
+
+echo $data;
+
+// ---------------------------------------------------------------------------------------------------------------------
