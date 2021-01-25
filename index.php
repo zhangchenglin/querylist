@@ -1,10 +1,4 @@
-<?php
-ini_set('memory_limit', '1024M');
-ini_set('max_execution_time', 100);
-
-global $data_result;
-
-?>
+<?php ?>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
@@ -22,11 +16,13 @@ global $data_result;
         <div class="fs-4">待整理数据地址</div>
         <a class="fs-5 text-decoration-none" target="_blank"
            href="http://preview.www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html">
-            preview.www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html
+            http://preview.www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html
         </a>
     </div>
-    <div class="d-flex justify-content-center" id="ql_methods">
-        <div class="mt-5">
+    <div class="d-flex flex-column justify-content-center" id="ql_methods">
+        <input class="my-4 form-control-lg" type="url" aria-label="url" id="mcaUrl"
+               value="http://preview.www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html">
+        <div class="mt-5 align-self-center">
             <button class="col-auto btn btn-outline-success" type="button" id="queryList">按queryList方式查看</button>
         </div>
     </div>
@@ -39,15 +35,12 @@ global $data_result;
 </div>
 <script>
     $().ready(function () {
-        let ql_methods = document.querySelector('#ql_methods');
-        [].slice.call(ql_methods.querySelectorAll('button')).forEach(function (currentBtn) {
-            currentBtn.addEventListener('click', function () {
-                getResult(currentBtn.id);
-            })
+        [].slice.call(document.querySelectorAll('#ql_methods button')).forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', getResult)
         })
     });
 
-    function getResult(Method) {
+    function getResult() {
         $.ajax({
             method: 'post',
             url: './result.php',
@@ -55,8 +48,7 @@ global $data_result;
             dataType: 'json',
             timeout: 100e3,
             data: {
-                method: Method,
-                url: 'http://preview.www.mca.gov.cn/article/sj/xzqh/2020/2020/202101041104.html'
+                url: document.querySelector('#mcaUrl').value
             },
             success: function (successData) {
                 console.log(successData);
