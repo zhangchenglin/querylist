@@ -45,8 +45,8 @@
             method: 'post',
             url: './result.php',
             cache: false,
-            dataType: 'json',
-            timeout: 100e3,
+            // dataType: 'json',
+            timeout: 10e3,
             data: {
                 url: document.querySelector('#mcaUrl').value
             },

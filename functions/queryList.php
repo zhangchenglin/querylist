@@ -5,14 +5,17 @@ use QL\QueryList;
 global $url;
 $mcaUrl = $url;
 
-$find_tr = 'tr:gt(2)';
+$tr = 'tr:gt(2)';
 
 $ql = new QueryList;
 
-$data = $ql
-    ->get($mcaUrl)
-    ->find($find_tr)
-    ->texts()
+$find = $ql->get($mcaUrl)
+    ->find($tr);
+
+$all = $find->texts()
     ->all();
 
+$data = $all;
+
 $ql->destruct();
+
