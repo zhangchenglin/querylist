@@ -36,20 +36,20 @@ $data = json_decode($data);
 $newData = [];
 
 foreach ($data as $key) {
-    $id = substr($key, 0, 6);
+    $id = mb_substr($key, 0, 6);
 //    echo $id . "<br>\r\n";
 
-    $name = substr($key, 6) . '';
+    $name = mb_substr($key, 6) . '';
 //    echo $name . "<br>\r\n";
 
-    if (number_format($id, 0)) {
+    if (number_format($id, 0)) {// todo:php报错
         $newData[] = [
             'id' => (int)$id,
-//            'name' => (string)$name,// todo:不能正常引用，因为其中原页面包含了未知字符（可能是最后注的序号2和3后面的小数点符号引起number_format()的错误），而且不能被substr() 正常截取
+            'name' => (string)$name,
         ];
     }
 
 }
 
 // 输出结果
-echo json_encode($newData);
+echo json_encode($newData, JSON_UNESCAPED_UNICODE);

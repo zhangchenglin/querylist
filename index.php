@@ -45,12 +45,13 @@
             method: 'post',
             url: './result.php',
             cache: false,
-            // dataType: 'json',
+            dataType: 'json',
             timeout: 10e3,
             data: {
                 url: document.querySelector('#mcaUrl').value
             },
             success: function (successData) {
+                successData = JSON.parse(successData).responseText;
                 console.log(successData);
                 document.querySelector('#dataResult').innerHTML = successData;
             },
