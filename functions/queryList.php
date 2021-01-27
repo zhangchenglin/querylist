@@ -5,7 +5,7 @@ use QL\QueryList;
 global $url;
 $mcaUrl = $url;
 
-$tr = 'tr:gt(2)';
+$tr = 'tr[height="19"]';
 
 $ql = new QueryList;
 

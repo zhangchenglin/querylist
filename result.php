@@ -31,7 +31,7 @@ $data = str_replace(' ', '', $data);
 $data = str_replace(' ', '', $data);
 
 // 重构数据结果的格式
-$data = json_decode($data);
+$data = json_decode($data, JSON_UNESCAPED_UNICODE);
 
 $newData = [];
 
@@ -39,8 +39,8 @@ foreach ($data as $key) {
     $id = mb_substr($key, 0, 6);
 //    echo $id . "<br>\r\n";
 
-    $name = mb_substr($key, 6) . '';
-//    echo $name . "<br>\r\n";
+    $name = mb_substr($key, 6);
+//    echo $name . "<br>\r\n";// todo:好奇怪，取消这类注释，就能顺利输出最后一组循环，否则不能顺利收尾,任意输出$key的值可以，但不是想要的数据
 
     if (number_format($id, 0)) {// todo:php报错
         $newData[] = [

@@ -51,13 +51,14 @@
                 url: document.querySelector('#mcaUrl').value
             },
             success: function (successData) {
-                successData = JSON.parse(successData).responseText;
+                console.log('++++');
+                // let data = JSON.parse(successData);
                 console.log(successData);
-                document.querySelector('#dataResult').innerHTML = successData;
+                document.querySelector('#dataResult').innerText = successData;
             },
             error: function (errorData) {
+                console.log('---');
                 console.log(errorData);
-                document.querySelector('#dataResult').innerHTML = errorData;
             }
         });
     }
