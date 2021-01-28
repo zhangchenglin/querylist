@@ -31,24 +31,21 @@ $data = str_replace(' ', '', $data);
 $data = str_replace(' ', '', $data);
 
 // 重构数据结果的格式
-$data = json_decode($data, JSON_UNESCAPED_UNICODE);
+$data = json_decode($data, true);
 
 $newData = [];
 
-foreach ($data as $key) {
+foreach ($data as $index => $key) {
     $id = mb_substr($key, 0, 6);
 //    echo $id . "<br>\r\n";
 
     $name = mb_substr($key, 6);
-//    echo $name . "<br>\r\n";// todo:好奇怪，取消这类注释，就能顺利输出最后一组循环，否则不能顺利收尾,任意输出$key的值可以，但不是想要的数据
+//    echo $name . "<br>\r\n";// todo:好奇怪，取消这类注释，就能顺利输出最后一组循环，无论最后一组循环是谁。否则不能顺利收尾JSON字符串
 
-    if (number_format($id, 0)) {// todo:php报错
-        $newData[] = [
-            'id' => (int)$id,
-            'name' => (string)$name,
-        ];
-    }
-
+    $newData[$index] = [
+        "name" => (string)$name,
+        "id" => (int)$id,
+    ];
 }
 
 

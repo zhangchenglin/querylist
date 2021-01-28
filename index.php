@@ -51,9 +51,9 @@
             },
             success: function (successData) {
                 console.log('++++');
-                // let data = JSON.parse(successData);
+                let data = JSON.parse(successData);
                 console.log(successData);
-                document.querySelector('#dataResult').innerText = successData;
+                document.querySelector('#dataResult').innerText = data;
             },
             error: function (errorData) {
                 console.log('---');
