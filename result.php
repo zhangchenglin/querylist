@@ -31,10 +31,9 @@ $data = str_replace(' ', '', $data);
 $data = str_replace(' ', '', $data);
 
 // 重构数据结果的格式
-$data = json_decode($data, true);
+$data = json_decode($data, true, 512, JSON_FORCE_OBJECT);
 
 $newData = [];
-
 foreach ($data as $index => $key) {
     $id = mb_substr($key, 0, 6);
 //    echo $id . "<br>\r\n";
@@ -42,9 +41,24 @@ foreach ($data as $index => $key) {
     $name = mb_substr($key, 6);
 //    echo $name . "<br>\r\n";// todo:好奇怪，取消这类注释，就能顺利输出最后一组循环，无论最后一组循环是谁。否则不能顺利收尾JSON字符串
 
+    $parent = '';
+    $parentX = mb_substr($id, 2);
+    if (mb_substr($id, 2) === '0000') {
+        $level = '省级';
+        $parent = '0';
+    } elseif (mb_substr($id, 4) === '00') {
+        $level = '市级';
+        $parent = mb_substr($id, 0, 2) . '0000';
+    } else {
+        $level = '区级';
+        $parent = mb_substr($id, 0, 4) . '00';
+    }
+
     $newData[$index] = [
         "name" => (string)$name,
-        "id" => (int)$id,
+        "id" => (string)$id,
+        "parent" => (string)$parent,
+        "level" => (string)$level,
     ];
 }
 
