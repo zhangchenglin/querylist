@@ -18,4 +18,3 @@ $all = $find->texts()
 $data = $all;
 
 $ql->destruct();
-
